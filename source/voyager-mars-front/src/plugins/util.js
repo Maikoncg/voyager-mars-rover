@@ -4,7 +4,8 @@
  * @param isArray
  * @returns {*}
  */
-export function getJsModules(files, isArray = false) {
+
+const getJsModules = (files, isArray = false) => {
   const modules = isArray ? [] : {};
   files.keys().forEach((key) => {
     if (key === './index.js') return;
@@ -14,4 +15,4 @@ export function getJsModules(files, isArray = false) {
   return modules;
 };
 
-
+export default { getJsModules };

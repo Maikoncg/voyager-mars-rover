@@ -3,11 +3,11 @@ import Vuex from 'vuex';
 import isEmpty from 'lodash/isEmpty';
 import isArray from 'lodash/isArray';
 import axios from 'axios';
-import { getJsModules } from '../plugins/util';
+import Util from '@/plugins/util';
 
 Vue.use(Vuex);
 
-const modules = getJsModules(require.context('.', false, /\.js$/));
+const modules = Util.getJsModules(require.context('.', false, /\.js$/));
 
 const store = new Vuex.Store({
   state: {

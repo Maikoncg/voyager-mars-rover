@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import { getJsModules } from '@/plugins/util';
+import Util from '@/plugins/util';
 
-const modules = getJsModules(require.context('.', false, /\.js$/), true);
+const modules = Util.getJsModules(require.context('.', false, /\.js$/), true);
 
 Vue.use(VueRouter);
 
