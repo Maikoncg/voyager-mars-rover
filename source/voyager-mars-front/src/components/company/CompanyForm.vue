@@ -41,6 +41,16 @@
                   :rules="[rules.required, rules.email]">
                 </v-text-field>
               </v-col>
+              <v-col md="12">
+                <v-select
+                  label="Plateau size"
+                  v-model="company.plateau_size"
+                  :items="plateau_sizes"
+                  :rules="[rules.required]"
+                  item-text="size"
+                  item-value="abbr">
+                </v-select>
+              </v-col>
             </v-form>
           </v-row>
         </v-container>
@@ -73,6 +83,15 @@ export default {
         return pattern.test(value) || 'Invalid e-mail.';
       },
     },
+    plateau_sizes: [
+      { size: 'Extra Extra small', abbr: 'XXS' },
+      { size: 'Extra small', abbr: 'XS' },
+      { size: 'Small', abbr: 'S' },
+      { size: 'Medium', abbr: 'M' },
+      { size: 'Large', abbr: 'L' },
+      { size: 'Extra large', abbr: 'XL' },
+      { size: 'Extra extra large', abbr: 'XXL' },
+    ],
     loading: false,
   }),
 
@@ -100,7 +119,7 @@ export default {
             Object.assign(this.value, this.company);
           }
         } catch (error) {
-          this.$store.commit('SET_MESSAGE', error.response.data);
+          this.$store.commit('SET_MESSAGE', 'Error saving company');
         } finally {
           this.loading = false;
         }

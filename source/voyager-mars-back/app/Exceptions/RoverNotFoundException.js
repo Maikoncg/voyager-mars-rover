@@ -4,9 +4,9 @@ const { LogicalException } = require('@adonisjs/generic-exceptions');
 
 const HttpStatus = use('http-status-codes');
 
-class CompanyNotFoundException extends LogicalException {
+class RoverNotFoundException extends LogicalException {
   constructor(id) {
-    super(`Company with id ${id} not found`);
+    super(`Rover with id ${id} not found`);
   }
 
   handle(error, { response }) {
@@ -14,4 +14,4 @@ class CompanyNotFoundException extends LogicalException {
   }
 }
 
-module.exports = CompanyNotFoundException;
+module.exports = RoverNotFoundException;

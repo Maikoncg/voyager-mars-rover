@@ -4,9 +4,9 @@ const { LogicalException } = require('@adonisjs/generic-exceptions');
 
 const HttpStatus = use('http-status-codes');
 
-class CompanyAlreadyExistException extends LogicalException {
+class RoverAlreadyExistException extends LogicalException {
   constructor(code) {
-    super(`Company with code ${code} already exists`);
+    super(`Rover with code ${code} already exists`);
   }
 
   handle(error, { response }) {
@@ -14,4 +14,4 @@ class CompanyAlreadyExistException extends LogicalException {
   }
 }
 
-module.exports = CompanyAlreadyExistException;
+module.exports = RoverAlreadyExistException;

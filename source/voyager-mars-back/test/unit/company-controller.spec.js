@@ -1,6 +1,6 @@
 'use strict';
 
-const Factory = use('Factory')
+const Factory = use('Factory');
 const HttpStatus = use('http-status-codes');
 
 const Suite = use('Test/Suite')('Company');
@@ -131,7 +131,7 @@ test('create company', async ({ client, assert }) => {
     .post('api/companies')
     .send(data)
     .end();
-
+    
   //assert
   response.assertStatus(HttpStatus.OK);
   assert.equal(response.body.code, data.code);

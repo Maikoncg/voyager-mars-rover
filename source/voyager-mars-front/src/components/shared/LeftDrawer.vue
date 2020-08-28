@@ -110,6 +110,11 @@ export default {
         text: 'Companies',
         to: '/company/admin',
       },
+      {
+        icon: 'mdi-rocket',
+        text: 'Rovers',
+        to: '/rover/index',
+      },
     ],
   }),
   methods: {

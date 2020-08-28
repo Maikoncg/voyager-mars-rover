@@ -21,4 +21,5 @@ Route.group(() => {
     return { greeting: 'Hello world in JSON' };
   });
   Route.resource('companies', 'CompanyController');
+  Route.resource('rovers', 'RoverController');
 }).prefix('api');

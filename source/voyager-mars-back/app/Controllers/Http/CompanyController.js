@@ -72,6 +72,7 @@ class CompanyController {
       name,
       description,
       email,
+      plateau_size,
     } = request.all();
 
     const companyExist = await Company.query().where({ code }).getCount() > 0;
@@ -85,6 +86,7 @@ class CompanyController {
       name,
       description,
       email,
+      plateau_size,
     });
   }
 
@@ -128,6 +130,7 @@ class CompanyController {
       name,
       description,
       email,
+      plateau_size,
     } = request.all();
 
     const company = await Company.query().where({id: params.id}).first();
@@ -141,6 +144,7 @@ class CompanyController {
       name,
       description,
       email,
+      plateau_size,
     });
 
     return company.save();

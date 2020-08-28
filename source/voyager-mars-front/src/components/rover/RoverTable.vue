@@ -1,8 +1,8 @@
 <template>
-  <div class="CompanyTable">
+  <div class="RoverTable">
     <v-card flat>
       <div class="d-flex pb-6">
-        <v-btn color="success" dark depressed @click="newCompany()">Create New</v-btn>
+        <v-btn color="success" dark depressed @click="newRover()">Create New</v-btn>
         <v-spacer/>
         <v-layout d-flex justify-end>
           <v-flex xs6>
@@ -18,7 +18,7 @@
       </div>
       <v-data-table
         :headers="headers"
-        :items="companies"
+        :items="rovers"
         :items-per-page="10"
         :search="search"
         :options="options"
@@ -27,37 +27,37 @@
           <v-icon
             small
             class="mr-2"
-            @click="editCompany(item)">
+            @click="editRover(item)">
             mdi-pencil
           </v-icon>
           <v-icon
             small
-            @click="deleteCompany(item)">
+            @click="deleteRover(item)">
             mdi-delete
           </v-icon>
         </template>
       </v-data-table>
     </v-card>
-    <CompanyForm
-      v-if="showCompanyDialog"
-      v-model="currentCompany"
-      @showDialog="showCompanyDialog = $event"
-      @new:company="newCompanyHandler()"
-    ></CompanyForm>
+    <RoverForm
+      v-if="showRoverDialog"
+      v-model="currentRover"
+      @showDialog="showRoverDialog = $event"
+      @new:rover="newRoverHandler()"
+    ></RoverForm>
   </div>
 </template>
 
 <script>
-  import api from '@/api/company';
+  import api from '@/api/rover';
 
-  import CompanyForm from '@/components/company/CompanyForm.vue';
+  import RoverForm from '@/components/rover/RoverForm.vue';
 
   export default {
-    components: { CompanyForm },
+    components: { RoverForm },
 
     data: () => ({
-      companies: [],
-      company: {},
+      rovers: [],
+      rover: {},
       headers: [
         {
           text: 'Code',
@@ -73,8 +73,12 @@
           value: 'description',
         },
         {
-          text: 'Email',
-          value: 'email',
+          text: 'Location',
+          value: 'location',
+        },
+        {
+          text: 'Company',
+          value: 'company.name',
         },
         {
           text: 'Actions',
@@ -87,8 +91,8 @@
       options: {
         sortBy: ['code'],
       },
-      showCompanyDialog: false,
-      currentCompany: {},
+      showRoverDialog: false,
+      currentRover: {},
     }),
 
     created() {
@@ -99,32 +103,32 @@
       async fetch() {
         this.loading = true;
         try {
-          const { data: companies } = await api.fetch({ search: this.search });
-          this.companies = companies;
+          const { data: rovers } = await api.fetch();
+          this.rovers = rovers;
         } catch (error) {
-          this.$store.commit('SET_MESSAGE', 'None companies found');
+          this.$store.commit('SET_MESSAGE', 'None rovers found.');
         } finally {
           this.loading = false;
         }
       },
-      newCompany() {
-        this.currentCompany = {};
-        this.showCompanyDialog = true;
+      newRover() {
+        this.currentRover = {};
+        this.showRoverDialog = true;
       },
-      newCompanyHandler() {
-        this.companies.push(this.currentCompany);
+      newRoverHandler() {
+        this.rovers.push(this.currentRover);
       },
-      editCompany(company) {
-        this.currentCompany = company;
-        this.showCompanyDialog = true;
+      editRover(rover) {
+        this.currentRover = rover;
+        this.showRoverDialog = true;
       },
-      async deleteCompany(company) {
+      async deleteRover(rover) {
         try {
           this.loading = true;
-          await api.delete(company.id);
-          this.companies.splice(this.companies.indexOf(company), 1);
+          await api.delete(rover.id);
+          this.rovers.splice(this.rovers.indexOf(rover), 1);
         } catch (error) {
-          this.$store.commit('SET_MESSAGE', 'It is necessary delete rovers linked to this company first');
+          this.$store.commit('SET_MESSAGE', 'Error deleting rover');
         } finally {
           this.loading = false;
         }

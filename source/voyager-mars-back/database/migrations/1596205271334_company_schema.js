@@ -1,7 +1,7 @@
 'use strict'
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use('Schema')
+const Schema = use('Schema');
 
 class CompanySchema extends Schema {
   up () {
@@ -12,12 +12,12 @@ class CompanySchema extends Schema {
       table.string('name');
       table.string('description');
       table.string('email');
-    })
+    });
   }
-
+  
   down () {
-    this.drop('companies')
+    this.drop('companies');
   }
-}
+};
 
-module.exports = CompanySchema
+module.exports = CompanySchema;

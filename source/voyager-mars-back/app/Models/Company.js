@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Company extends Model {
+	rovers () {
+		return this.hasMany('/App/Models/Company')
+	}
 }
 
 module.exports = Company
