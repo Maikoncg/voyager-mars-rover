@@ -32,7 +32,7 @@
 		<v-col v-show="rover.id" cols="12">
 			<span>Current position: {{currentPosition.x / 50}} - {{currentPosition.y / 50}} - {{currentPosition.direction}}</span>
 		</v-col>
-		<v-col cols="12">
+		<v-col cols="12" v-show="rover.id">
 			<div v-show="company.name" class="Plateau" :class="{'bottom15px': this.$vuetify.breakpoint.mdAndUp}">
 				<v-icon color="black" class="RoverTop">mdi-arrow-up-thin-circle-outline</v-icon>
 				<v-icon color="black" class="RoverBottom">mdi-arrow-down-thin-circle-outline</v-icon>
@@ -290,10 +290,10 @@
         this.loading = true;
         try {
           const { data: company } = await companyAPI.fetch({ search: this.search });
-          if (company.length === 0) this.$store.commit('SET_MESSAGE', 'None companies found');
+          if (company.length === 0) this.$store.commit('SET_MESSAGE', 'None companies found. You will need to register a company first.');
           this.companies = company;
         } catch (error) {
-          this.$store.commit('SET_MESSAGE', 'None companies found');
+          this.$store.commit('SET_MESSAGE', 'None companies found.');
         } finally {
           this.loading = false;
         }
@@ -302,10 +302,10 @@
         this.loading = true;
         try {
           const { data: rover } = await roverAPI.fetch({ company_id: id });
-          if (rover.length === 0) this.$store.commit('SET_MESSAGE', 'None rovers found');
+          if (rover.length === 0) this.$store.commit('SET_MESSAGE', 'None rovers found. You will need to register a rover first.');
           this.rovers = rover;
         } catch (error) {
-        	this.$store.commit('SET_MESSAGE', 'None rovers found');
+        	this.$store.commit('SET_MESSAGE', 'None rovers found.');
         } finally {
           this.loading = false;
         }
@@ -321,7 +321,7 @@
         try {
           await roverAPI.update(this.rover.id, update);
         } catch (error) {
-          this.$store.commit('SET_MESSAGE', 'Wrong coordinates sent');
+          this.$store.commit('SET_MESSAGE', 'Wrong coordinates sent.');
         } finally {
           this.loading = false;
         }
