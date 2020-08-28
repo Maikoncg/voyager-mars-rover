@@ -290,6 +290,7 @@
         this.loading = true;
         try {
           const { data: company } = await companyAPI.fetch({ search: this.search });
+          if (company.length === 0) this.$store.commit('SET_MESSAGE', 'None companies found');
           this.companies = company;
         } catch (error) {
           this.$store.commit('SET_MESSAGE', 'None companies found');
@@ -301,6 +302,7 @@
         this.loading = true;
         try {
           const { data: rover } = await roverAPI.fetch({ company_id: id });
+          if (rover.length === 0) this.$store.commit('SET_MESSAGE', 'None rovers found');
           this.rovers = rover;
         } catch (error) {
         	this.$store.commit('SET_MESSAGE', 'None rovers found');
